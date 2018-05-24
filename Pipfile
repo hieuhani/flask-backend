@@ -5,8 +5,12 @@ name = "pypi"
 
 [packages]
 flask = "*"
+sqlalchemy = "*"
+graphene-sqlalchemy = "*"
+flask-graphql = "*"
 
 [dev-packages]
+pylint = "*"
 
 [requires]
 python_version = "3.6"
