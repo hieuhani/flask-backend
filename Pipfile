@@ -9,7 +9,6 @@ graphene-sqlalchemy = "*"
 flask-graphql = "*"
 flask-sqlalchemy = "*"
 flask-migrate = "*"
-"psycopg2" = "*"
 
 [dev-packages]
 pylint = "*"
