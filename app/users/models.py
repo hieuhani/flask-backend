@@ -45,3 +45,4 @@ class Contact(db.Model):
     type = db.Column(db.SmallInteger, nullable=False)
     value = db.Column(db.String, nullable=False)
     verified = db.Column(db.Boolean, nullable=False, default=False)
+
