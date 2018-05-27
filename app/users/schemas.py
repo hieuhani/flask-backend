@@ -1,19 +1,21 @@
-from marshmallow import Schema, fields
+import graphene
+from graphene import relay
+from graphene_sqlalchemy import SQLAlchemyObjectType
+from .models import User, Contact
 
 
-class UserSchema(Schema):
-    id = fields.String(required=True)
-    first_name = fields.String(required=True)
-    last_name = fields.String(required=True)
-    contacts = fields.Nested('ContactSchema', many=True)
+class UserType(SQLAlchemyObjectType):
+    class Meta:
+        model = User
+        interfaces = (relay.Node, )
+        exclude_fields = ('password_hash',)
 
 
-class ContactSchema(Schema):
-    id = fields.String(required=True)
-    type = fields.Integer(required=True)
-    value = fields.String(required=True)
-    verified = fields.Boolean(required=True)
+class ContactType(SQLAlchemyObjectType):
+    class Meta:
+        model = Contact
+        interfaces = (relay.Node,)
 
 
-user_schema = UserSchema()
-contact_schema = ContactSchema()
+class UserQuery(graphene.ObjectType):
+    profile = graphene.String()
