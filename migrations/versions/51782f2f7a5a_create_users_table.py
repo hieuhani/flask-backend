@@ -20,9 +20,10 @@ depends_on = None
 def upgrade():
     op.create_table(
         'users',
-        sa.Column('id', UUID, primary_key=True),
+        sa.Column('id', UUID, primary_key=True, server_default=sa.text('gen_random_uuid()')),
         sa.Column('first_name', sa.String, nullable=False),
         sa.Column('last_name', sa.String, nullable=False),
+        sa.Column('password_hash', sa.String, nullable=False),
     )
 
 

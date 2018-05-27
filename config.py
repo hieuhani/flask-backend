@@ -1,6 +1,7 @@
 class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = False
     SQLALCHEMY_RECORD_QUERIES = True
+    SECRET_KEY = 'hehe'
 
     @staticmethod
     def init_app(app):
