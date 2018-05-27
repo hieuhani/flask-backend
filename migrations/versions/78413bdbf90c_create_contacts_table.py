@@ -19,10 +19,9 @@ depends_on = None
 def upgrade():
     op.create_table(
         'contacts',
-        sa.Column('id', UUID, primary_key=True),
-        sa.Column('first_name', sa.String, nullable=False),
+        sa.Column('id', UUID, primary_key=True, server_default=sa.text('gen_random_uuid()')),
         sa.Column('user_id', UUID, sa.ForeignKey('users.id'), nullable=False),
-        sa.Column('type', sa.Integer, nullable=False),
+        sa.Column('type', sa.SmallInteger, nullable=False),
         sa.Column('value', sa.String, nullable=False),
         sa.Column('verified', sa.Boolean, nullable=False, default=False),
     )
