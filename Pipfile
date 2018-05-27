@@ -5,8 +5,17 @@ name = "pypi"
 
 [packages]
 flask = "*"
+graphene-sqlalchemy = "*"
+flask-sqlalchemy = "*"
+flask-migrate = "*"
+flask-httpauth = "*"
+marshmallow = "*"
 
 [dev-packages]
+pylint = "*"
 
 [requires]
 python_version = "3.6"
+
+[pipenv]
+allow_prereleases = true
