@@ -1,6 +1,8 @@
 from flask import Flask
+from flask_graphql import GraphQLView
 from flask_sqlalchemy import SQLAlchemy
 from config import config
+
 
 db = SQLAlchemy()
 
@@ -12,7 +14,14 @@ def create_app(config_name):
 
     db.init_app(app)
 
-    from .auth import auth as auth_blueprint
-    app.register_blueprint(auth_blueprint, url_prefix='/auth')
+    from .graphql_schema import schema
+    app.add_url_rule(
+        '/graphql',
+        view_func=GraphQLView.as_view(
+            'graphql',
+            schema=schema,
+            graphiql=True,
+        )
+    )
 
     return app
