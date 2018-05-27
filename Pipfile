@@ -9,7 +9,8 @@ graphene-sqlalchemy = "*"
 flask-sqlalchemy = "*"
 flask-migrate = "*"
 flask-httpauth = "*"
-marshmallow = "*"
+flask-graphql = "*"
+graphene = "*"
 
 [dev-packages]
 pylint = "*"
