@@ -1,6 +1,7 @@
 from werkzeug.security import generate_password_hash, check_password_hash
 from sqlalchemy.dialects.postgresql import UUID
-from itsdangerous import TimedJSONWebSignatureSerializer
+from itsdangerous import TimedJSONWebSignatureSerializer, BadData
+from graphql import GraphQLError
 from flask import current_app
 from app import db
 
@@ -24,6 +25,16 @@ class User(db.Model):
     @password.setter
     def password(self, password):
         self.password_hash = generate_password_hash(password)
+
+    @staticmethod
+    def verify_auth_token(token):
+        serializer = TimedJSONWebSignatureSerializer(current_app.config['SECRET_KEY'])
+        try:
+            data = serializer.loads(token)
+        except BadData:
+            raise GraphQLError('Invalid access token')
+
+        return User.query.get(data['id'])
 
     def verify_password(self, password):
         return check_password_hash(self.password_hash, password)
